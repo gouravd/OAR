@@ -1,0 +1,112 @@
+Change Log for 0.9.3.1
+======================
+* Added Feature for "New Email with Attachment".
+* The code for creating a CommandBar Button is taken from http://msdn.microsoft.com/en-us/library/ms269110.aspx
+* A slight change to grammar displayed in the message box (added 'an').
+* Added words "enclosing" and "enclosure".
+* Found a new low Priority bug in Forwaring emails. It is not able to calculate the attachments if the forwarded emails has
+attachments. As a result, even if there are attachments, it asks if you want to add attachments.
+
+Change Log for 0.9.3.8
+======================
+Small fix for updating Attachments count when using new mail with attachment
+
+Change Log for 0.9.3.9
+======================
+Fix for attachment counts when we add attachments before clicking send button.
+
+Change Log for 0.9.4.0
+======================
+Added feature: Moved logic of comparing words to file. File located where outlook.exe is located and is called OARWordList.txt.
+Users can manage list of words here.
+
+Change Log for 0.9.4.1
+======================
+Added Menu - Manage Words, to easily add and delete words
+
+Change Log for 0.9.4.2
+=======================
+Few more Try/Catches
+Changed Location of OARWordList.txt to Windows System folder
+Logging Diagnostic information in OARDiag.log for troubleshooting at my end
+Can View ORADiag.log from ORAAddin menu
+
+Change Log for 0.9.4.3
+======================
+Reviewed few articles. C# should handle different languages automatically. 
+Would request users to test different languages.
+Closing the work item.
+
+Change Log for 0.9.5.0
+======================
+Fixed the bug http://oar.codeplex.com/WorkItem/View.aspx?WorkItemId=1283, where we saw an Exception
+when we do a "Vote Reply" (not an exclusive reply).
+Added a Help Menu to give some basic Instructions.
+
+Change Log for 0.9.7.0
+======================
+Added Feature: Search through Subject for Keywords.
+Added Feature: using the tag SUB:-:, we can now specify words that would be searched in Subjects only.
+Changed File names. File names now have version number as well.
+Added some more information to help menu
+
+Change Log for 0.9.7.3
+======================
+Added Feature: As per http://oar.codeplex.com/Thread/View.aspx?ThreadId=51309, now we are tracking
+matched words in Subject, in body and displaying in the Message prompt itself.
+Removed a known glitch (refreshed by http://oar.codeplex.com/Thread/View.aspx?ThreadId=51311): Now
+empty lines are not treated as words
+Removed the following Line from the Help Menu (Most importantly you need to ensure that you press Enter once after the last word.)
+Due to version change, filenames changes too.
+Changed the Name of helpXXXX.txt to OARhelpxxxx.txt
+After digging into the error reported by http://oar.codeplex.com/WorkItem/View.aspx?WorkItemId=1456, found that if
+we have outlook running in Background(without an Outlook window), the Application.ActiveExplorer() returns null. The Outlook has to start with a Window(not as background process) and the Menu would load. If
+before the menu is loaded the the Outlook starts as background process, now it prompts user to close the Outlook and start 
+normally. I might consider removing this prompt completely in future versions, because the code changes allows things to work normally and hence this prompt woudl be only informational.
+
+Change Log for 0.9.7.4
+======================
+Changed location for creation of files from %windir%/System32 to My Documents
+
+Change Log for 0.9.7.6
+=============================
+Added code for limiting the size of attachment can be added.
+Help File updated with usage information of how to set the Size limitation of attachments.
+
+Change Log for 0.9.8.1
+======================
+Added few more logic in creation of the Wordlist files, during startup. 
+Fixes a bug in 0.9.7.6 where if the file was not already created (wordlist). We AV's out silenty and other files were not created. Now we check in the startup if the file is created. if not we create it then and there.
+
+Change Log for 0.9.8.2
+======================
+Fixed a small bug where we were not updating the value of Attachment counter when the attachment size was more than threshold and user did not want to add it to email.
+Added a check to check if subject line is empty, then it would prompt to user.
+
+Change Log for 0.9.9.2
+======================
+Added GUI options window for managing words, Subject, allowing message with Empty subject and Size of attachment.
+Now we can restrict the sending of attachments altogether.
+You can disable warning on Emails with empty Subject
+Now we can restrict specific file types in attachments
+Beta Feature - Options of Pattern Matching Mode or Exact Matching Mode
+Option of saving attachments to folder (for all emails, emails from certain user, before a specific date), by directly right clicking on the folder. 
+Bug Fix - German characters not identified
+
+Change Log for 1.0.0.0b (Work in progress)
+==============
+* Added two more options in Options Window. 1) Allow deletion of attachments while saving to disk by using context menu
+* Added option to AutoSave Incoming Mail based on User Created Rule (Still writing code)
+* Created Rule Window, Code for serializing Rule to Disk
+* Optimized search code for Saving attachments (based on Sender or Recieve Time) using Context Menu (Still Work Pending...mainly bug fix)
+* Fixed a bug where we got HRResult 0x80040108. The repro I had, the issue happened while accepting or rejecting meeting/appointment, because they were not Outlook.MailItems
+* Created a Separate class for Logging messages
+* Create notification Icon for important messages. 
+* Now this is multithreaded
+* Embedded Icon to Resources
+* Protecting Write to logs file by Lock
+* Added code to get attachment threshold size at runtime. So now everytime we save Attachment size in options menu, we don't have to restart outlook.
+* Added code to save all settings in Options window to Disk. So all settings now persist accross lifetime of Outlook
+* Modularized lot more code. Use windiff to get more details
+* Added placeholder for Utility "Dump Rules tool"
+* Location for Most files have changed from My Documents to My Documents\OARsFiles
